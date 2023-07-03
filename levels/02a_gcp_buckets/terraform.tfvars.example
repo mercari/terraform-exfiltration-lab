@@ -1,0 +1,4 @@
+project      = "my-project-is-very-secret"
+region       = "asia-northeast1"
+secret_id    = "some-secure-secret"
+exfil_server = "127.0.0.1"

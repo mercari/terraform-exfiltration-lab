@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+readonly docker=${docker:-$(command -v docker)}
+
+fatal() {
+  echo "[FATAL] ${*}" >&2
+  exit 1
+}
+
+scan_for_secrets_docker() {
+  [[ -z "${docker}" ]] && fatal "Docker not found, please install it and try again."
+  "${docker}" run --rm -v "$PWD":/local gcr.io/kouzoh-secret-scanner-prod/kouzoh-secret-scanner:v0.2.2 \
+    --scan-type pre-commit \
+    --scan-path /local \
+    --severity-level '(medium|high|critical)'
+}
+
+main () {
+  set -euf -o pipefail
+  scan_for_secrets_docker "$@"
+}
+
+main "$@"

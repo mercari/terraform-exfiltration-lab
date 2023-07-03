@@ -1,0 +1,3 @@
+project      = "my-project-is-very-evil"
+region       = "asia-northeast1"
+exfil_bucket = "my-bucket-is-very-safe"
